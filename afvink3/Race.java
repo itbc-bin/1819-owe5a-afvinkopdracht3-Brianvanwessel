@@ -1,4 +1,4 @@
-package afvink3;
+package com.company.afvink3;
 
 /**
  * Race class
@@ -41,17 +41,22 @@ import javax.swing.*;
 public class Race extends JFrame implements ActionListener {
 
     /** declaratie van variabelen */
-    /* (1) Declareer hier een constante int met de naam lengte en een waarde van 250 */
+
+    private int lengte = 250;
+    Paard h1 = new Paard("h1",Color.gray);
+    Paard h2 = new Paard("h2",Color.BLUE);
+    Paard h3 = new Paard("h3",Color.red);
+    Paard h4 = new Paard("h3",Color.green);/* (1) Declareer hier een constante int met de naam lengte en een waarde van 250 */
     /* (2) Declareer hier h1, h2, h3, h4 van het type Paard
      *  Deze paarden instantieer je later in het programma
      */
-    /* (3) Declareer een button met de naam button van het type JButton */
+    JButton button = new JButton();/* (3) Declareer een button met de naam button van het type JButton */
     private JPanel panel;
 
     /** Applicatie - main functie voor runnen applicatie */
     public static void main(String[] args) {
         Race frame = new Race();
-        /* (4) Geef het frame een breedte van 400 en hoogte van 140 */
+        frame.setSize(400,140);/* (4) Geef het frame een breedte van 400 en hoogte van 140 */
         frame.createGUI();
         frame.setVisible(true);
     }
@@ -62,7 +67,9 @@ public class Race extends JFrame implements ActionListener {
         panel.setBackground(Color.white);
         /** Tekenen van de finish streep */
         /* (5) Geef de finish streep een rode kleur */
+        g.setColor(Color.red);
         g.fillRect(lengte, 0, 3, 100);
+
         /**(6) Creatie van 4 paarden
          * Dit is een instantiering van de 4 paard objecten
          * Bij de instantiering geef je de paarden een naam en een kleur mee
@@ -79,10 +86,16 @@ public class Race extends JFrame implements ActionListener {
             h3.run();
             h4.run();
 
+            pauzeer(1000);
             /* (7) Voeg hier een aanroep van de methode pauzeer toe zodanig
              * dat er 1 seconde pauze is. De methode pauzeer is onderdeel
              * van deze class
              */
+            tekenPaard(g,h1);
+            tekenPaard(g,h2);
+            tekenPaard(g,h3);
+            tekenPaard(g,h4);
+
             /* (8) Voeg hier code in om 4 paarden te tekenen die rennen
              * Dus een call van de methode tekenPaard
              */
@@ -112,7 +125,7 @@ public class Race extends JFrame implements ActionListener {
         panel.setPreferredSize(new Dimension(300, 100));
         panel.setBackground(Color.white);
         window.add(panel);
-        /* (9) Zet hier de tekst Run! op de button */
+        button.setText("RUN!");/* (9) Zet hier de tekst Run! op de button */
         window.add(button);
         button.addActionListener(this);
     }
