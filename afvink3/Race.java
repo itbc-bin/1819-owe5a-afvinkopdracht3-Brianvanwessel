@@ -42,11 +42,12 @@ public class Race extends JFrame implements ActionListener {
 
     /** declaratie van variabelen */
 
-    private int lengte = 250;
+    private int lengte =500;
     Paard h1 = new Paard("h1",Color.gray);
     Paard h2 = new Paard("h2",Color.BLUE);
     Paard h3 = new Paard("h3",Color.red);
-    Paard h4 = new Paard("h3",Color.green);/* (1) Declareer hier een constante int met de naam lengte en een waarde van 250 */
+    Paard h4 = new Paard("h3",Color.green);
+    Paard h5 = new Paard("h5",Color.yellow);/* (1) Declareer hier een constante int met de naam lengte en een waarde van 250 */
     /* (2) Declareer hier h1, h2, h3, h4 van het type Paard
      *  Deze paarden instantieer je later in het programma
      */
@@ -56,7 +57,7 @@ public class Race extends JFrame implements ActionListener {
     /** Applicatie - main functie voor runnen applicatie */
     public static void main(String[] args) {
         Race frame = new Race();
-        frame.setSize(400,140);/* (4) Geef het frame een breedte van 400 en hoogte van 140 */
+        frame.setSize(800,350);/* (4) Geef het frame een breedte van 400 en hoogte van 140 */
         frame.createGUI();
         frame.setVisible(true);
     }
@@ -68,7 +69,7 @@ public class Race extends JFrame implements ActionListener {
         /** Tekenen van de finish streep */
         /* (5) Geef de finish streep een rode kleur */
         g.setColor(Color.red);
-        g.fillRect(lengte, 0, 3, 100);
+        g.fillRect(lengte , 0, 3, 300);
 
         /**(6) Creatie van 4 paarden
          * Dit is een instantiering van de 4 paard objecten
@@ -80,13 +81,15 @@ public class Race extends JFrame implements ActionListener {
         while (h1.getAfstand() < lengte
                 && h2.getAfstand() < lengte
                 && h3.getAfstand() < lengte
-                && h4.getAfstand() < lengte) {
+                && h4.getAfstand() < lengte
+                && h4.getAfstand() < lengte){
             h1.run();
             h2.run();
             h3.run();
             h4.run();
+            h5.run();
 
-            pauzeer(1000);
+            pauzeer(100);
             /* (7) Voeg hier een aanroep van de methode pauzeer toe zodanig
              * dat er 1 seconde pauze is. De methode pauzeer is onderdeel
              * van deze class
@@ -95,7 +98,7 @@ public class Race extends JFrame implements ActionListener {
             tekenPaard(g,h2);
             tekenPaard(g,h3);
             tekenPaard(g,h4);
-
+            tekenPaard(g,h5);
             /* (8) Voeg hier code in om 4 paarden te tekenen die rennen
              * Dus een call van de methode tekenPaard
              */
@@ -114,6 +117,9 @@ public class Race extends JFrame implements ActionListener {
         if (h4.getAfstand() > lengte) {
             JOptionPane.showMessageDialog(null, h4.getNaam() + " gewonnen!");
         }
+        if (h5.getAfstand() > lengte) {
+            JOptionPane.showMessageDialog(null, h5.getNaam() + " gewonnen!");
+        }
     }
 
     /** Creatie van de GUI*/
@@ -122,7 +128,7 @@ public class Race extends JFrame implements ActionListener {
         Container window = getContentPane();
         window.setLayout(new FlowLayout());
         panel = new JPanel();
-        panel.setPreferredSize(new Dimension(300, 100));
+        panel.setPreferredSize(new Dimension(600, 250));
         panel.setBackground(Color.white);
         window.add(panel);
         button.setText("RUN!");/* (9) Zet hier de tekst Run! op de button */
@@ -132,9 +138,13 @@ public class Race extends JFrame implements ActionListener {
 
     /** Teken het paard */
     private void tekenPaard(Graphics g, Paard h) {
-        g.setColor(h.getKleur());
-        g.fillRect(10, 20 * h.getPaardNummer(), h.getAfstand(), 5);
+        Image img1 = Toolkit.getDefaultToolkit().getImage("C:\\Users\\brian\\Pictures\\horse.png");
+        g.setColor(Color.white);
+        g.fillRect(0, 40 * h.getPaardNummer(), h.getAfstand() + 40 , 44);
+        g.drawImage(img1,h.getAfstand(),40 * h.getPaardNummer() , this);
+
     }
+
 
     /** Actie indien de button geklikt is*/
     public void actionPerformed(ActionEvent event) {
